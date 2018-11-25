@@ -79,6 +79,14 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation-duration: 0.3;
+}
+
+
+.deck .card.incorrect {
+    cursor: default;
+    background: #f44265;
+    font-size: 33px;
 }
 
 /*
