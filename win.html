@@ -1,0 +1,73 @@
+<!doctype>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title>Matching Game</title>
+    <meta name="description" content="">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/confetti.js"></script>
+    <style>
+	    html, body {
+			  margin: 0;
+			  padding: 0;
+			  height: 100%;
+			  width: 100%;
+			}
+    	h1 {
+    		text-align: center;
+    		font-weight: 500;
+    		padding-top: 6em;
+    	}
+    	h3.win-message {
+    		text-align: center;
+    		font-weight: 300;
+    	}
+    	.score-panel {
+    		text-align: center;
+    	}
+    	button {
+				background-color: #02ccba;
+				color: white;
+				font-family: 'Coda', cursive;
+				font-size: 16px;
+				border: 0px;
+				border-radius: 4px;
+				opacity: 0.6;
+  			transition: 0.3s;
+    	}
+    	button:hover {opacity: 1}
+    	#confetti{
+			  position: absolute;
+			  left: 0;
+			  top: 0;
+			  height: 100%;
+			  width: 100%;
+			  pointer-events: none
+			}
+    </style>
+	</head>
+	<body>
+		<canvas height='1' id='confetti' width='1'></canvas>
+		<div class="container">
+			<header>
+	      <h1>Matching Game</h1>
+	      <h3 class="win-message">🎉🎊🙌 YOU WON 🙌🎊🎉</h3>
+	      <section class="score-panel">
+	      	<ul class="stars">
+        		<li><i id="star1" class="fa fa-star"></i></li>
+        		<li><i id="star2" class="fa fa-star"></i></li>
+        		<li><i id="star3" class="fa fa-star"></i></li>
+        	</ul>
+	      </section>
+	      <h3 id="time">Time (s): &emsp;</h3>
+	      <h3 id="score">Score: &emsp;</h3>
+	    </header>
+	    <button>Play Again!</button>
+  	</div>
+  	<script>
+  		console.log(winTime);
+  	</script>
+	</body>
+</html>

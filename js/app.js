@@ -31,12 +31,17 @@ function shuffle(array) {
 /**
  * @description this logs the time and injects it into the html
  */
+ var totalSeconds;
 function displayTime() {
 	var totalTime = performance.now() - startTime;
 	var totalSeconds = Math.round(totalTime / 1000);
 	document.querySelector('.time').innerHTML = `Time (s): &emsp;${totalSeconds}`;
 	if (time == true) {
 		setTimeout(displayTime, 1000);
+	} else {
+		startTime = 0;
+		totalSeconds = 0;
+		document.querySelector('.time').innerHTML = `Time (s): &emsp;${totalSeconds}`;
 	}
 }
 
@@ -47,6 +52,7 @@ var startTime = 0;
 var totalMoves = 0;
 var card1;
 var card2;
+var winTime = 0;
 
 /**
  * @description Shuffles all of the cards and changes the order of the elements being displayed.
@@ -65,7 +71,7 @@ function generateNewPattern() {
 
 
 function win() {
-
+	window.location.href = "win.html";
 }
 
 
@@ -111,10 +117,10 @@ function checkWin() {
 	for (let card of allCards) {
 		if (!card.classList.contains('match')) {
 			return false;
-		} else {
-			return true;
 		}
 	}
+	console.log("you won!");
+	return true;
 }
 
 
@@ -128,6 +134,8 @@ function resetAll() {
 	totalMoves = 0;
 	startTime = 0;
 	time = false;
+	totalSeconds = 0;
+	totalTime = 0;
 	document.querySelector('.time').innerHTML = 'Time (s): &emsp;0';
 	// return the style of the stars back
 	document.getElementById('star3').style.opacity = 1;
@@ -207,6 +215,11 @@ function move(event) {
 			}
 		}
 	if (checkWin()) {
+		var winTime = totalSeconds;
+
+		totalSeconds = 0;
+		totalTime = 0;
+		startTime = 0;
 		win();
 	}
 }
