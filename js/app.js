@@ -233,10 +233,12 @@ function move(event) {
  * 1 star: > 20 totalMoves
  */
 function updateStars() {
+	console.log(typeof totalMoves)
 	// console.log(totalMoves);
 	if (totalMoves <= 12 && totalMoves > 8) {
 		document.getElementById('star3').style.opacity = 0.3;
 	} else if (totalMoves >= 20) {
+		document.getElementById('star3').style.opacity = 0.3;
 		document.getElementById('star2').style.opacity = 0.3;
 	}
 }
