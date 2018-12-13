@@ -258,7 +258,7 @@ if (document.querySelector('.restart') != null) {
 	var totalMoves = localStorage.getItem("moves");
 	updateStars();
 	let timeElement = document.getElementById('time');
-	timeElement.innerHTML = "Time (s): &emsp;" + localStorage.getItem("winTime");
+	timeElement.innerHTML = "Time Taken(s): &emsp;" + localStorage.getItem("winTime");
 	let scoreElement = document.getElementById('score');
 	scoreElement.innerHTML = "Moves: &emsp;" + localStorage.getItem("moves")
 
