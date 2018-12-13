@@ -31,10 +31,10 @@ function shuffle(array) {
 /**
  * @description this logs the time and injects it into the html
  */
- var totalSeconds;
+ var totalSeconds = 0;
 function displayTime() {
 	var totalTime = performance.now() - startTime;
-	var totalSeconds = Math.round(totalTime / 1000);
+	totalSeconds = Math.round(totalTime / 1000);
 	document.querySelector('.time').innerHTML = `Time (s): &emsp;${totalSeconds}`;
 	if (time == true) {
 		setTimeout(displayTime, 1000);
@@ -119,7 +119,7 @@ function checkWin() {
 			return false;
 		}
 	}
-	console.log("you won!");
+	// console.log("you won!");
 	return true;
 }
 
@@ -215,8 +215,9 @@ function move(event) {
 			}
 		}
 	if (checkWin()) {
-		var winTime = totalSeconds;
-
+		console.log(totalSeconds);
+		localStorage.setItem("moves", totalMoves);
+		localStorage.setItem("winTime", totalSeconds);
 		totalSeconds = 0;
 		totalTime = 0;
 		startTime = 0;
@@ -232,7 +233,7 @@ function move(event) {
  * 1 star: > 20 totalMoves
  */
 function updateStars() {
-	console.log(totalMoves);
+	// console.log(totalMoves);
 	if (totalMoves <= 12 && totalMoves > 8) {
 		document.getElementById('star3').style.opacity = 0.3;
 	} else if (totalMoves >= 20) {
@@ -240,15 +241,25 @@ function updateStars() {
 	}
 }
 
+var url = window.location.pathname;
+var documentName = url.substring(url.lastIndexOf('/') + 1);
+if (document.querySelector('.restart') != null) {
+	const reset = document.querySelector('.restart');
+	reset.addEventListener('click', resetAll)
 
-const reset = document.querySelector('.restart');
-reset.addEventListener('click', resetAll)
+	const allCards = document.querySelectorAll('.card');
 
+	for (let i = 0; i < allCards.length; i++) {
+		allCards[i].addEventListener('click', move);
+	}
+} else {
+	var totalMoves = localStorage.getItem("moves");
+	updateStars();
+	let timeElement = document.getElementById('time');
+	timeElement.innerHTML = "Time (s): &emsp;" + localStorage.getItem("winTime");
+	let scoreElement = document.getElementById('score');
+	scoreElement.innerHTML = "Moves: &emsp;" + localStorage.getItem("moves")
 
-const allCards = document.querySelectorAll('.card');
-
-for (let i = 0; i < allCards.length; i++) {
-	allCards[i].addEventListener('click', move);
 }
 
 
