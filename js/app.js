@@ -15,7 +15,7 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -31,9 +31,9 @@ function shuffle(array) {
 /**
  * @description this logs the time and injects it into the html
  */
- var totalSeconds = 0;
+ let totalSeconds = 0;
 function displayTime() {
-	var totalTime = performance.now() - startTime;
+	let totalTime = performance.now() - startTime;
 	totalSeconds = Math.round(totalTime / 1000);
 	document.querySelector('.time').innerHTML = `Time (s): &emsp;${totalSeconds}`;
 	if (time == true) {
@@ -46,13 +46,13 @@ function displayTime() {
 }
 
 
-var time = false;
-var clicks = 0;
-var startTime = 0;
-var totalMoves = 0;
-var card1;
-var card2;
-var winTime = 0;
+let time = false;
+let clicks = 0;
+let startTime = 0;
+let totalMoves = 0;
+let card1;
+let card2;
+let winTime = 0;
 
 /**
  * @description Shuffles all of the cards and changes the order of the elements being displayed.
@@ -62,7 +62,7 @@ function generateNewPattern() {
 					  4, 5, 6, 7,
 					  8, 9, 10, 11,
 					  12, 13, 14, 15]
-	var allCards = document.querySelectorAll('.card');
+	let allCards = document.querySelectorAll('.card');
 	const shuffledNums = shuffle(numCards);
 	for (let card = 0; card < shuffledNums.length; card++) {
 		allCards[card].style.order = String(shuffledNums[card]);
@@ -202,7 +202,7 @@ function move(event) {
 			// update the total number of moves and updates the stars
 			totalMoves += 1;
 			document.querySelector('.moves').textContent = totalMoves;
-			updateStars();
+			updateStars(totalMoves);
 
 			card2 = event.target;
 			if (!determineEquality(card1, card2)) {
@@ -232,19 +232,18 @@ function move(event) {
  * 2 stars: > 8 totalMoves, < 12 totalMoves
  * 1 star: > 20 totalMoves
  */
-function updateStars() {
-	console.log(typeof totalMoves)
+function updateStars(moves) {
 	// console.log(totalMoves);
-	if (totalMoves <= 12 && totalMoves > 8) {
+	if (moves <= 12 && moves > 8) {
 		document.getElementById('star3').style.opacity = 0.3;
-	} else if (totalMoves >= 20) {
+	} else if (moves >= 20) {
 		document.getElementById('star3').style.opacity = 0.3;
 		document.getElementById('star2').style.opacity = 0.3;
 	}
 }
 
-var url = window.location.pathname;
-var documentName = url.substring(url.lastIndexOf('/') + 1);
+let url = window.location.pathname;
+let documentName = url.substring(url.lastIndexOf('/') + 1);
 if (document.querySelector('.restart') != null) {
 	const reset = document.querySelector('.restart');
 	reset.addEventListener('click', resetAll)
@@ -255,8 +254,10 @@ if (document.querySelector('.restart') != null) {
 		allCards[i].addEventListener('click', move);
 	}
 } else {
-	var totalMoves = localStorage.getItem("moves");
-	updateStars();
+	let totalMoves = Number(localStorage.getItem("moves"));
+	console.log(typeof totalMoves);
+	console.log(totalMoves);
+	updateStars(totalMoves);
 	let timeElement = document.getElementById('time');
 	timeElement.innerHTML = "Time Taken(s): &emsp;" + localStorage.getItem("winTime");
 	let scoreElement = document.getElementById('score');
